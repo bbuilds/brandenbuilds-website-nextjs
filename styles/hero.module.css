@@ -1,0 +1,46 @@
+.logo-icon {
+	min-width: 18px;
+	@apply mr-1 fill-current;
+	max-width: 25px;
+}
+
+.logo-name {
+	@apply text-bbuilds-black;
+	min-width: 250px;
+}
+
+.hero-home {
+	min-height: 15.625rem;
+	height: calc(50vh);
+}
+
+@media (min-width: 768px) {
+	.hero-logo .logo-icon {
+		max-width: 30px;
+	}
+	.expierence-list-item {
+		word-spacing: normal;
+	}
+}
+
+@media (min-width: 1024px) {
+	.hero-home {
+		height: calc(65vh);
+	}
+}
+
+.expierence-list-item {
+	@apply absolute text-lg leading-tight opacity-0 font-bold lg:text-3xl lg:font-normal;
+	transform-origin: center center 25px;
+}
+
+.out {
+	transform: rotateX(90deg);
+	transition: 0.32s cubic-bezier(0.6, 0, 0.7, 0.2);
+}
+.in {
+	transition: 0.38s ease;
+}
+.behind {
+	transform: rotateX(-90deg);
+}

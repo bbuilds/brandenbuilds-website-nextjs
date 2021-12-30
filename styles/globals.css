@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--bbuilds-yellow: #ffcd67;
+	--bbuilds-teal: #01fdf6;
+	--bbuilds-black: #292929;
+	--bbuilds-gray: #e6e7e8;
+}
+
+html {
+	font-size: calc(16px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+	scroll-behavior: smooth;
+}
+
+body {
+	@apply font-courier leading-normal text-base;
+}
+
+html,
+body {
+	/* scroll-behavior: smooth; */
+	overflow-x: hidden;
+}
+
+a {
+	@apply transition duration-300 ease-in-out;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	@apply leading-snug;
+}
+
+@media (min-width: 768px) {
+	html {
+		font-size: 111%;
+	}
+}
+
+h1 {
+	@apply mt-0 text-2xl lg:text-4xl;
+}
+
+h2 {
+	@apply text-2xl lg:text-3xl;
+}
+
+h3 {
+	@apply text-2xl;
+}
+
+h4 {
+	@apply text-xl;
+}
+
+h5 {
+	@apply text-lg;
+}
+
+.button,
+button {
+	@apply bg-bbuilds-black text-bbuilds-yellow transition duration-300 ease-in-out py-2 px-4 border border-bbuilds-yellow rounded hover:bg-bbuilds-yellow  hover:text-bbuilds-black;
+}
+
+svg {
+	max-width: 100%;
+	height: auto;
+}
+
+.theme-full-height {
+	height: calc(100vh - 71px);
+}
+
+.scroll-in {
+	opacity: 0;
+	transform: translateZ(0);
+	perspective: 1000px;
+	backface-visibility: hidden;
+	transition: 1.5s all cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.link-shield::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/****
+ * Header Styles
+ */
+.logo {
+	max-width: 25%;
+}
+
+.logo-name {
+	@apply hidden;
+	@apply text-bbuilds-gray;
+	@apply h-auto;
+	@apply w-full;
+}
+
+.logo-icon {
+	@apply h-auto;
+	max-width: 25px;
+	min-width: 18px;
+}
+
+.logo-icon .logo-icon-left-bar {
+	@apply text-bbuilds-gray;
+}
+
+.logo-icon .logo-icon-square {
+	@apply text-bbuilds-yellow;
+}
+
+.logo-icon .logo-icon-box {
+	@apply text-bbuilds-teal;
+}
+
+@media (min-width: 768px) {
+	.logo-name {
+		@apply block;
+	}
+	.logo-icon {
+		@apply mr-2;
+	}
+}
+
+@media (min-width: 1024px) {
+	.logo {
+		max-width: 15%;
+	}
+}
+
+.hide-nav {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	transition: width 0.2s 0.2s, height 0.2s 0.2s, opacity 0.2s;
+}
+
+.show-nav {
+	opacity: 1;
+	width: 100vw;
+	height: 100vh;
+	transition: width 0.2s, height 0.2s, opacity 0.2s 0.2s;
+}
+/***
+ * Want to mvoe to another file styles for pages / posts
+ * ****/
+
+.post-content {
+	line-height: 1.5;
+}
+
+.post-content a {
+	@apply underline;
+}
+
+.post-content ul {
+	padding-inline-start: 1.7em;
+	list-style: disc;
+}
+
+.post-content ol {
+	padding-inline-start: 1.7em;
+	list-style: normal;
+}
+
+.post-content ul > li {
+	padding-left: 0.1em;
+}
+
+.post-content p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.post-img {
+	@apply my-4;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+	@apply leading-tight;
+	@apply mt-5;
+	@apply mb-4;
+}
+
+.post-content h2 {
+	@apply mt-8;
+}
+
+.post-content ul,
+ul.disc {
+	padding-inline-start: 1.2em;
+	list-style: disc;
+}
+
+.post-content ul > li,
+ul.disc > li {
+	padding-left: 0.1em;
+}
+
+pre {
+	padding: 1.25em;
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+
+	tab-size: 2;
+	overflow-x: scroll;
+}
+
+code {
+	font-size: 75%;
+}

@@ -1,0 +1,7 @@
+.icon-box.active .extra-info {
+	transform: translateY(0);
+}
+
+.connector-icon {
+	min-width: 10%;
+}

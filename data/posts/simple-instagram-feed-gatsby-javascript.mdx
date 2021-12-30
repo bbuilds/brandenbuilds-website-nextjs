@@ -1,0 +1,361 @@
+---
+    title: Simple Instagram Feed in Gatsby (JavaScript)
+    tags: ['gatsby', 'instagram', 'serverless functions']
+    date: '2021-09-08'
+    featuredImage: /images/blog/simple-instagram-feed-gatsby-javascript/simple-javascript-instagram-feed.png
+    id: b4
+    excerpt: A guide setting up a simple instragm feed and displaying in Gatsby or whatever JS framework you prefer.  
+    slug: simple-instagram-feed-gatsby-javascript
+    keywords: tutorial, javascript, instagram, gatsby
+    genre: websites
+    wordcount: 1108
+---
+
+
+
+
+When I was creating my <Link href="https://brandenbuilds.com/blog/byoungz-headlesswp-gatsby"><a>Headless WordPress site</a></Link>, one of the largest headaches I ran into was creating a simple Instagram feed to display in Gatsby. I just wanted to post the most recent (as of build time) posts of my digital nomad feed. I also saw a lot of questions on Reddit and Discord channels asking the same questions I had with no answers. There is a <a href="https://www.gatsbyjs.com/plugins/gatsby-source-instagram/" target="_blank" rel="noreferrer">community plugin</a>, but I ran into roadblock after roadblock so I just decided to jump in and make my own from scratch. I hope this helps someone else.
+
+<TOCInline headings={props.toc} toHeading={3} asDiscloure={true} />
+
+## Setting up Facebook/Instagram Developer Admin
+
+What we will need
+
+1. <a href="https://developers.facebook.com/docs/development/register/" target="_blank" rel="noreferrer">A Facebook developer account</a>
+2. Your personal IG account / business account your IG is an admin of.
+3. Create a Facebook app for your feed
+4. Adding your IG user as a test user
+
+The Facebook docs are not very straightforward and a nightmare to go through. I couldn't find any great tutorials on how to set up your Facebook app for a personal Instagram feed.
+
+### Set up Facebook App
+
+Once you have a developer account and your Instagram is created, we need to create an app within Facebook. 
+
+Go to <a href="https://developers.facebook.com/" target="_blank" rel="noreferrer">developers.facebook.com</a>, click the Green Button **Create App**, select the last option "none."
+
+<Image
+  alt="Creating a Facebook App for Instgram"
+  src="/images/blog/simple-instagram-feed-gatsby-javascript/add-facebook-app-platform.png"
+  width={740}
+  height={388}
+  className="post-img"
+/>
+
+Fill in the name, email, and connect to a business account you manage if you want to pull in a business feed. I did this for my website. Then create the app. 
+
+Next, we need to add a platform. On the left sidebar, click on **Settings > Basic.** You can are welcome to fill out the settings but the import part is we need to add a platform. Scroll down on the settings page to the bottom and click **add platform.**
+
+**Select Website and Add Your website URL**
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/create-facebook-app.png"}
+    alt="Adding Facebook Platform to Instgram App"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+Now that we added the platform we will be using this on, we can add the product we will be using: **Instagram Basic Display**
+
+You can either click on the **Dashboard** in the sidebar or **Add Product** on the same sidebar and select **Instagram Basic Display.** 
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/add-instagram-product.png"}
+    alt="Add an Instagram Product to Facebook App"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+Under Basic Settings in Instagram Basic Display, click on **create new app.** and add a display name.
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/create-ig-app.png"}
+    alt="Create a new Instagram App"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+**Set Up Instagram tester (Must be public account)**
+
+Now we add ourselves as an Instagram Tester under Basic Settings. Scroll to the **bottom under Instagram testers and click add Instagram tester.** Once you add your account, we need to accept the invite. 
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/add-ig-test-user.png"}
+    alt="Adding an Instagram test user to your Facebook app"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+Open a new web browser and go to [www.instagram.com](http://www.instagram.com/) and sign into your Instagram account that you just invited. Navigate to (Profile Icon) > Edit Profile > Apps and Websites > Tester Invites and accept the invitation.
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/accept-ig-invite.png"}
+    alt="Popup accepting the o-auth to connect to Facebook app"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+
+**Generate user token in FB**
+
+Go back to your Facebook developer app page and navigate to **Instagram Basic Display> Basic Display** tab on the sidebar.
+
+Click on **Generate Token** button for Instagram Tester user of your app. Follow the pop up instructions through and make sure you allow access to media. Click I understand and copy your token somewhere safe or add it to your .env file now.
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/generate-ig-user-token.png"}
+    alt="generating the instgram token"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/accept-oauth-ig-app.png"}
+    alt="Accepting the Oauth request to generate token"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/copy-ig-user-token.png"}
+    alt="Copy the Instgram User Token"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+You can test this info by firing a get request using a program like postman with this URL. You can check out the [fields for instagram.](https://developers.facebook.com/docs/instagram-basic-display-api/reference/media/#fields)
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/postman-request.png"}
+    alt="Screnshot of Instagram get request in Postman"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+```jsx
+https://graph.instagram.com/me/media?fields=${fields}&access_token=${process.env.IG_ACCESS_TOKEN}
+```
+
+## Setting up the Simple Instagram feed in Gatsby
+
+You can view the full source code for my [Digital Nomad Travel Blog | Gatsby + Wordpress Repo](https://github.com/bbuilds/byoungz-gatsby-headlesswp)
+
+First, take your user generated access token and save into your .env file. I named my variable IG_ACCESS_TOKEN
+
+### Adding Instagram Source Node
+
+Now that we tested our API call and getting what we want, we need to create our source nodes and feed the data in GraphQL. 
+
+Creating the Source Node
+
+First, let's set up our schema for our Instagram node. 
+
+```jsx
+exports.sourceNodes = async ({ actions }) => {
+  const { createNode } = actions
+
+  //https://developers.facebook.com/docs/instagram-basic-display-api/reference/media/#fields
+  const fields = `timestamp,caption,media_url,media_type,permalink`
+
+  // Download data from a remote API.
+  const igResponse = await fetch(
+    `https://graph.instagram.com/me/media?fields=${fields}&access_token=${process.env.IG_ACCESS_TOKEN}`
+  )
+
+  const { data } = await igResponse.json()
+
+  if (data) {
+    data.forEach(post =>
+      createNode({
+        id: `${post.id}`,
+        parent: null,
+        children: [],
+        internal: {
+          type: `ByoungzInstaNode`,
+          mediaType: post.media_type,
+          contentDigest: crypto
+            .createHash(`md5`)
+            .update(JSON.stringify(post))
+            .digest(`hex`),
+        },
+        caption: post.caption,
+        permalink: post.permalink,
+        timestamp: post.timestamp,
+        mediaURL: post.media_url,
+      })
+    )
+  }
+
+  return
+}
+```
+
+Setting up external images
+
+It's a bit tricky setting up external images but luckily, Gatsby Has a Great Guide to preprocessing external images.
+
+```jsx
+//https://www.gatsbyjs.com/docs/how-to/images-and-media/preprocessing-external-images/
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode },
+  store,
+  cache,
+  createNodeId,
+}) => {
+  // For all Byoungz Insta Nodes
+  if (node.internal.type === "ByoungzInstaNode") {
+    let fileNode = await createRemoteFileNode({
+      url: node.mediaURL, // string that points to the URL of the image
+      parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
+      createNode, // helper function in gatsby-node to generate the node
+      createNodeId, // helper function in gatsby-node to generate the node id
+      cache, // Gatsby's cache
+      store, // Gatsby's Redux store
+    })
+
+    if (fileNode) {
+      node.thumbnail___NODE = fileNode.id
+    }
+  }
+}
+```
+
+Restart Gatsby development server and open GraphQL GUI. You should see your nodes. 
+
+<Image
+    src={"/images/blog/simple-instagram-feed-gatsby-javascript/graphql-data.png"}
+    alt="Screenshot of Instgram GraphQL Data in Gatsby"
+    width={740}
+    height={388}
+    className="post-img"
+/>
+
+### Displaying content in Gatsby
+
+I created an [Instagram Hook](https://github.com/bbuilds/byoungz-gatsby-headlesswp/blob/main/src/hooks/useInstagram.js) to be bale to easily pull in the images throughout my website.
+
+```jsx
+import { graphql, useStaticQuery } from "gatsby"
+import { getImage } from "gatsby-plugin-image"
+
+const useInstagram = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      allByoungzInstaNode(limit: 6, sort: { fields: timestamp, order: DESC }) {
+        nodes {
+          timestamp
+          thumbnail {
+            childImageSharp {
+              gatsbyImageData(width: 250)
+            }
+          }
+          id
+          caption
+          permalink
+        }
+      }
+    }
+  `)
+
+  return data.allByoungzInstaNode.nodes.map(node => ({
+    image: getImage(node.thumbnail),
+    id: node.id,
+    caption: node.caption,
+    permalink: node.permalink,
+  }))
+}
+
+export default useInstagram
+```
+
+Then I use the hook in my [Instagram Component](https://github.com/bbuilds/byoungz-gatsby-headlesswp/blob/main/src/components/Instagram.js)
+
+```jsx
+import React from "react"
+import { graphql, useStaticQuery } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
+
+import InstagramIcon from "../assets/images/svg/instagram.svg"
+import socialData from "../constants/social.json"
+
+import useInstagram from "../hooks/useInstagram"
+
+const query = graphql`
+  {
+    wpPage(databaseId: { eq: 112 }) {
+      homePageTemplate {
+        homeIgTitle
+      }
+    }
+  }
+`
+
+const InstagramFeed = () => {
+  const data = useStaticQuery(query)
+  const instaPhotos = useInstagram()
+  return (
+    <section className="section-instagram pb-12">
+      <div className="container mx-auto mb-10 px-10">
+        <div className="flex flex-wrap items-center lg:justify-between">
+          <header data-aos="zoom-out-right">
+            <hr className="dashed border-t-3 border-dashed border-white mb-2 w-24 mx-0" />
+            <h2 className="uppercase md:text-5xl mb-8 lg:mb-0">
+              {data.wpPage.homePageTemplate.homeIgTitle}
+            </h2>
+          </header>
+          <a
+            className="flex items-center uppercase md:text-3xl mr-4 md:mr-8 text-primary "
+            href={socialData.instagramURL}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-aos="zoom-out-left"
+          >
+            <span className="mr-2">@BYOUNGZ</span>
+            <InstagramIcon className="h-4 w-auto lg:h-8" />
+          </a>
+        </div>
+      </div>
+      <div className="flex flex-wrap md:flex-nowrap justify-center">
+        {instaPhotos.map((photo, index) => (
+          <a
+            href={`${photo.permalink}`}
+            className="block m-1"
+            target="_blank"
+            rel="noopener noreferrer"
+            key={photo.id}
+            data-aos="fade-right"
+            data-aos-delay={`${index}00`}
+          >
+            <GatsbyImage image={photo.image} alt={photo.caption} />
+          </a>
+        ))}
+      </div>
+      <div className="text-center my-8">
+        <a
+          className="decor-link text-white relative animated hover:text-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={socialData.instagramURL}
+        >
+          View Instagram
+        </a>
+      </div>
+    </section>
+  )
+}
+
+export default InstagramFeed
+```
+
+You can view the finished product on my [Digital Nomad Travel Blog](https://byoungz.com/) I hope this helps someone else! It took me a bit of time to piece this all together.

@@ -1,0 +1,38 @@
+.blog-post ul {
+	padding-inline-start: 1.7em;
+}
+
+.blog-post ul {
+	list-style: disc;
+}
+
+.blog-post ul > li {
+	padding-left: 0.1em;
+}
+
+.blog-post p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.blog-post a {
+	position: relative;
+	text-decoration: underline;
+}
+
+.blog-post a::before {
+	content: '';
+	position: absolute;
+	bottom: 2px;
+	right: 0;
+	width: 0;
+	height: 2px;
+	transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+	background-color: var(--bbuilds-black);
+}
+
+.blog-post a:hover::before {
+	left: 0;
+	right: auto;
+	width: 100%;
+}

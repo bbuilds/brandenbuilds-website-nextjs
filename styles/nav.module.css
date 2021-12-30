@@ -1,0 +1,23 @@
+.nav-items a {
+	@apply text-lg;
+}
+
+.active {
+	@apply text-bbuilds-yellow;
+}
+
+@media (min-width: 768px) {
+	.nav-items a {
+		@apply text-base;
+	}
+	.dropdown-menu {
+		min-width: 22.5rem;
+		visibility: hidden;
+	}
+
+	.menu-item:hover .dropdown-menu,
+	.menu-item:focus-within .dropdown-menu {
+		visibility: visible;
+		opacity: 1;
+	}
+}

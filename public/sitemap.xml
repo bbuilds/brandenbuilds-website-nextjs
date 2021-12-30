@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>http://localhost:3000/blog</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/branding</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/contact</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/headless-wordpress-development</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/seo</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/services</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/web-development</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/wordpress-development</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/branden-builds-launches</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/simple-instagram-feed-gatsby-javascript</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/byoungz-headlesswp-gatsby</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/headless-wordpress-and-gatsby-presentation</loc>
+	</url>
+
+	<url>
+		<loc>http://localhost:3000/interview-with-codehs</loc>
+	</url>
+</urlset>

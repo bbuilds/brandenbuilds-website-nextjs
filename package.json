@@ -1,0 +1,44 @@
+{
+  "name": "bbuilds-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^1.6.22",
+    "@next/mdx": "^12.0.7",
+    "aos": "^2.3.4",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.25.0",
+    "esbuild": "^0.13.15",
+    "github-slugger": "^1.4.0",
+    "gray-matter": "^4.0.3",
+    "mdx-bundler": "^8.0.0",
+    "next": "^12.0.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^6.1.0",
+    "rehype-slug": "^5.0.0",
+    "remark": "^14.0.1",
+    "remark-html": "^15.0.0",
+    "unist-util-visit": "^4.1.0"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "8.0.1",
+    "eslint-config-next": "11.1.2",
+    "globby": "^11.0.1",
+    "next-sitemap": "^1.6.203",
+    "postcss": "^8.3.11",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.5.1",
+    "tailwindcss": "^2.2.19"
+  }
+}

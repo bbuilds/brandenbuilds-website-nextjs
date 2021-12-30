@@ -1,0 +1,15 @@
+.post-preview-image::after {
+	content: '';
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: var(--bbuilds-black);
+	transition-duration: 200ms;
+}
+
+.post-preview:hover .post-preview-image::after {
+	opacity: 1;
+}
