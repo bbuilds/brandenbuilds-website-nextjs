@@ -45,14 +45,19 @@ const navItems = [
 ];
 
 export default function Header({ mobileMenuState, toggleMenuState, falseMenuState }) {
+	const handleTabletChange = (e) => {
+		if (e.matches) {
+			falseMenuState();
+		}
+	};
+
 	useEffect(() => {
-		const handleTabletChange = (e) => {
-			if (e.matches) {
-				falseMenuState();
-			}
-		};
 		let query = window.matchMedia('(min-width: 768px)');
 		query.addEventListener('change', handleTabletChange);
+
+		return () => {
+			query.removeEventListener('change', handleTabletChange);
+		};
 	}, []); //eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {

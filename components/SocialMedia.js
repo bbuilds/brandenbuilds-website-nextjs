@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 const socialItems = [
 	{
 		href: 'https://github.com/bbuilds/',

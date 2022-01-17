@@ -6,7 +6,7 @@ export default class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
-					<link rel="preconnect" href="https://use.typekit.net" crossOrigin />
+					<link rel="preconnect" href="https://use.typekit.net" crossOrigin="true" />
 					<link rel="preload" as="style" href="https://use.typekit.net/fqs8gqy.css" />
 					<link
 						rel="stylesheet"
@@ -14,7 +14,6 @@ export default class MyDocument extends Document {
 						media="print"
 						onLoad="this.media='all'"
 					/>
-
 					<noscript>
 						<link rel="stylesheet" href="https://use.typekit.net/fqs8gqy.css" />
 					</noscript>
