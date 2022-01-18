@@ -158,7 +158,7 @@ svg {
  * ****/
 
 .post-content {
-	line-height: 1.5;
+	@apply leading-relaxed;
 }
 
 .post-content a {

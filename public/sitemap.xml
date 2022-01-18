@@ -41,6 +41,10 @@
 	</url>
 
 	<url>
+		<loc>http://localhost:3000/detecting-memory-leaks</loc>
+	</url>
+
+	<url>
 		<loc>http://localhost:3000/simple-instagram-feed-gatsby-javascript</loc>
 	</url>
 

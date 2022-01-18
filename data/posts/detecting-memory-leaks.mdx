@@ -1,0 +1,213 @@
+---
+    title: Detecting Memory Leaks
+    tags: ['fuite', 'memory leaks', 'dev tools']
+    date: '2022-01-17'
+    featuredImage: /images/blog/detecting-memory-leaks/detecting-memory-leaks.jpg
+    id: b6
+    excerpt: Recently came across a tool Fuite to detect memory leaks in your web apps and gave it a run.
+    slug: detecting-memory-leaks
+    keywords: gatsbyjs, fuite, memory leaks, dev tools
+    genre: debugging
+    wordcount: 1221
+---
+
+I saw Fuite, [a tool for detecting memory leaks in web applications](https://github.com/nolanlawson/fuite), come across my screen a few times from various newsletters I subscribe to. I wanted to run a check on my [digital nomad blog](https://byoungz.com/) to see if I could find some memory leaks. I quickly put my headless WordPress and Gatbsy blog together and admittedly didn’t spend a ton of time checking some more advanced things I should, like memory leaks. 
+
+## Memory Leaks Recap
+
+This blog post isn’t meant to be an in depth education on memory leaks or how to solve them but just want to give a general definition and the problems I was looking to solve. 
+
+TLDR: A JavaScript memory leak is an object in memory that persists after its no longer in use. JavaScript has an automatic trash collector but neglectant coding can prevent objects in memory from completing the last life cycle method of memory, **releasing it.**
+
+The Memory Life Cycle works as follows:
+
+Allocate Memory ⇒ Use Memory ⇒ Release Memory. 
+
+
+## Finding Memory Leaks
+
+This is where Fuite comes in. Finding memory leaks in your code is tedious and requires digging through chrome developer tools to find these memory leaks. Fuite seemed to automate this process and point in the right direction where I could easily find these leaks. 
+
+The initial run on my digital nomad blog was brutal. So I spun my local server and dug in. Some code snippets below from my run on a local development build:
+
+```bash
+URL       : http://localhost:8000/
+Scenario  : Default
+Iterations: 7 (Default)
+
+TEST RESULTS
+
+--------------------
+
+Test         : Go to /category/adventure-journal/ and back
+Memory change: +1.23 MB
+Leak detected: Yes
+
+Leaking objects:
+
+╔══════════════════════════════════════════╤═════════╤════════════════════════╗
+║ Object                                   │ # added │ Retained size increase ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ Detached CanvasRenderingContext2D        │ 1       │ +804 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ Detached HTMLCanvasElement               │ 1       │ +1.22 kB               ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ Detached IntersectionObserver            │ 1       │ +324 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ Detached IntersectionObserverDelegate    │ 1       │ +112 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ Detached V8IntersectionObserverCallback  │ 1       │ +72 B                  ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ s                                        │ 1       │ +428 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ HTMLCollection                           │ 2       │ +225 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ MutationObserver                         │ 2       │ +439 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ MutationObserver::Delegate               │ 2       │ +160 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ MutationObserverRegistration             │ 2       │ +600 B                 ║
+╟──────────────────────────────────────────┼─────────┼────────────────────────╢
+║ URL                                      │ 2       │ +376 B                 ║
+
+...
+
+Leaking event listeners (+51.714285714285715 total):
+
+╔═══════════════════╤════════════════════╤════════════════════════════════════╗
+║ Event             │ # added            │ Nodes                              ║
+╟───────────────────┼────────────────────┼────────────────────────────────────╢
+║ error             │ 1.8571428571428572 │ link (+1.8571428571428572)         ║
+╟───────────────────┼────────────────────┼────────────────────────────────────╢
+║ load              │ 3.857142857142857  │ Window, link (+1.8571428571428572) ║
+╟───────────────────┼────────────────────┼────────────────────────────────────╢
+║ orientationchange │ 2                  │ Window                             ║
+╟───────────────────┼────────────────────┼────────────────────────────────────╢
+║ resize            │ 2                  │ Window                             ║
+╟───────────────────┼────────────────────┼────────────────────────────────────╢
+║ scroll            │ 42                 │ Window                             ║
+╚═══════════════════╧════════════════════╧════════════════════════════════════╝
+
+Leaking DOM nodes (+1.8571428571428572 total):
+
+╔═════════════╤════════════════════╗
+║ Description │ # added            ║
+╟─────────────┼────────────────────╢
+║ link        │ 1.8571428571428572 ║
+╚═════════════╧════════════════════╝
+
+Leaking collections:
+
+╔══════╤════════╤══════════════════════════════════╤════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║ Type │ Change │ Preview                          │ Size increased at                                                                                                  ║
+╟──────┼────────┼──────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢
+║ Map  │ +1     │ Map([object Object]: Array, ...) │ set             webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Utils/Plugins.js:143:20                 ║
+║      │        │                                  │ getInteractors  webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/InteractionManager.js:35:40        ║
+║      │        │                                  │ init            webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/InteractionManager.js:29:9         ║
+║      │        │                                  │                 webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/Particles.js:46:30                 ║
+║      │        │                                  │                 webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/Container.js:59:21                 ║
+║      │        │                                  │                 webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/Loader.js:114:26                   ║
+║      │        │                                  │ call            webpack://byoungz-gatsby-frontend/node_modules/regenerator-runtime/runtime.js:63:39                ║
+║      │        │                                  │ tryCatch        webpack://byoungz-gatsby-frontend/node_modules/regenerator-runtime/runtime.js:294:21               ║
+║      │        │                                  │ _invoke         webpack://byoungz-gatsby-frontend/node_modules/regenerator-runtime/runtime.js:119:20               ║
+╟──────┼────────┼──────────────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢
+║ Map  │ +1     │ Map([object Object]: Array, ...) │ set                 webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Utils/Plugins.js:163:17             ║
+║      │        │                                  │ getUpdaters         webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/Particles.js:50:36             ║
+║      │        │                                  │                     webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/Container.js:59:21             ║
+║      │        │                                  │                     webpack://byoungz-gatsby-frontend/node_modules/tsparticles/Core/Loader.js:114:26               ║
+║      │        │                                  │ call                webpack://byoungz-gatsby-frontend/node_modules/regenerator-runtime/runtime.js:63:39            ║
+║      │        │                                  │ tryCatch            webpack://byoungz-gatsby-frontend/node_modules/regenerator-runtime/runtime.js:294:21           ║
+║      │        │                                  │ _invoke             webpack://byoungz-gatsby-frontend/node_modules/regenerator-runtime/runtime.js:119:20           ║
+║      │        │                                  │ arg                 webpack://byoungz-gatsby-frontend/node_modules/@babel/runtime/helpers/asyncToGenerator.js:3:24 ║
+║      │        │                                  │ asyncGeneratorStep  webpack://byoungz-gatsby-frontend/node_modules/@babel/runtime/helpers/asyncToGenerator.js:25:8 ║
+╚══════╧════════╧══════════════════════════════════╧════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+```
+
+So as you can see, I was not in good shape. Some things really stuck out to me:
+
+- I had 51 scroll events leaking (big yikes)
+- TsParticles seemed to causing some issues. I used this for a cool banner effect on my category pages.
+- Another library, Animate on scroll, I had a feeling was causing these event leaks.
+
+## Fixing Memory Leaks
+
+Fuite capture three types of memory leaks as I pasted above. 
+
+1. Event Leaks
+2. Collection / Dom Node Leaks
+3. Object Leaks
+
+### My Process
+
+A brief overview of how I tackled these leaks. I’m not going into depth about each technique as this is a very tedious and time consuming process that involved digging through console tools. The creator of Fuite wrote an article on [fixing memory leaks in web applications](https://nolanlawson.com/2020/02/19/fixing-memory-leaks-in-web-applications/) that will do a much better job than I.
+
+1. Spun up local development site
+2. Ran Fuite on local development 
+3. Went in and removed TS particles from the banner to see how many leaks that fixed. It didn’t go down as much as I expected, but still dropped a bit. I’ll come back to integrating this in.
+    
+    ```bash
+    URL       : http://localhost:8000/
+    Scenario  : Default
+    Iterations: 7 (Default)
+    
+    TEST RESULTS
+    
+    --------------------
+    
+    Test         : Go to /category/adventure-journal/ and back
+    Memory change: +1.15 MB
+    Leak detected: Yes
+    ```
+    
+4. Opened my local development server in chrome dev tools and fixed the event leaks. A big discovery here was that [Animate on Scroll](https://michalsnik.github.io/aos/) library was creating the large amount of scroll event leaks. I swapped that out with [https://scrollrevealjs.org/](https://scrollrevealjs.org/) and made sure I deleted the scroll reveal object when a component was unmounted. I also had to fix a few custom events I wrote which could be seen `orientationchange`  and `resize`
+    
+    NOT REMOVING EVENT HANDLERS WHEN COMPONENT UNMOUNTS IS A VERY COMMON MEMORY LEAK AND EASILY AVOIDABLE.
+    
+    ```bash
+    URL       : http://localhost:8000/
+    Scenario  : Default
+    Iterations: 7 (Default)
+    
+    TEST RESULTS
+    
+    --------------------
+    
+    Test         : Go to /category/adventure-journal/ and back
+    Memory change: +165 kB
+    Leak detected: Yes
+    
+    Leaking objects:
+    
+    ╔═════════════════════════════╤═════════╤════════════════════════╗
+    ║ Object                      │ # added │ Retained size increase ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ Detached HTMLPictureElement │ 1       │ +160 B                 ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ Detached HTMLSourceElement  │ 1       │ +440 B                 ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ Detached ShadowRoot         │ 1       │ +752 B                 ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ FiberRootNode               │ 1       │ +1.39 kB               ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ Map                         │ 1       │ +196 B                 ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ ReactDOMBlockingRoot        │ 1       │ +16 B                  ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ Detached HTMLDivElement     │ 9       │ +42.8 kB               ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ Detached SVGAnimatedLength  │ 12      │ +1.06 kB               ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ Detached EventListener      │ 135     │ +18.8 kB               ║
+    ╟─────────────────────────────┼─────────┼────────────────────────╢
+    ║ (closure)                   │ 182     │ +184 kB                ║
+    ```
+    
+    Wow, cleaning up my event leaks and removing AOS really fixed a lot of issues. I went from +1.23 MB to +165 kB !!
+    
+5. After clearing the event leaks, I went to fix the collections and node list.  Removing AOS and TS Particles cleaned these up mostly.
+6. I added back in TS Particles but used the JS only version and not react articles. I then destroy and clear the DOM list when component unmounts. 
+7. Finally it was time to tackle objects leaking, which can be difficult and currently still working through. Some of these seemed to be caused by plugins from Gatsby but I have heap stacks to run through. 
+
+## Conclusion
+
+Thanks to Fuite, I lost my weekend diving into memory leaks on my blog. I learned a lot and learned to implement better code patterns, especially when it comes to event handlers inside components.
