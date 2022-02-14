@@ -19,7 +19,7 @@ This post is aimed for the business owners with a physical location or businesse
 
 ## How to set up Your Google Business Profile
 
-**In November 2021 Google rebranded Google My Business (GMB) to Google Business Profile (GBP)**
+**In November 2021 Google rebranded Google My Business (GMB) to Google Business Profile (GBP)** You will often see Google My Business across the web, this is the same as Google Business Profile.
 
 Step one, claim or create your [Google Business Profile](https://www.google.com/business/) (GPB) account. It’s a free business account that creates a profile you see when searching on Google Maps. We want to be as through and detailed as possible when setting this up. Complete every section possible.
 
