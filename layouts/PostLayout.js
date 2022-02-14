@@ -11,7 +11,7 @@ import { BlogSEO } from '@/components/SEO';
 const editUrl = (fileName) => `${siteMetaData.siteRepo}/blob/master/data/posts/${fileName}`;
 
 export default function PostLayout({ frontMatter, next, prev, children }) {
-	//pull fornt matter data
+	//pull front matter data
 	const { slug, date, title, tags, readingMinutes, featuredImage, fileName } = frontMatter;
 	//reading mins rounding
 	const roundedReadingMinutes = Math.round(readingMinutes);

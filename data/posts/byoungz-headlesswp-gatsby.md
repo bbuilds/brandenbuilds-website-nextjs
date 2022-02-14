@@ -4,7 +4,7 @@
     date: '2021-07-21'
     featuredImage: /images/blog/byoungz-headlesswp-gatsby/byoungz-website-gatsby-headlesswp.jpg
     id: b2
-    excerpt: Byoungz, my digital nmad blog was recently re-built on GtasbyJS and Headless WP setup.  
+    summary: Byoungz, my digital nmad blog was recently re-built on GtasbyJS and Headless WP setup.  
     slug: byoungz-headlesswp-gatsby
     keywords: website launch, gatsbyjs, headlesswp, jamstack
     genre: headless wordpress

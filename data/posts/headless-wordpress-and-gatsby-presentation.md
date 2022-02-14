@@ -4,7 +4,7 @@
     date: '2021-10-15'
     featuredImage: /images/blog/byoungz-headlesswp-gatsby/byoungz-gatsby-build.jpg
     id: b5
-    excerpt: I recently presented at Seattle WP Developers meetup on my recent headless WP rebuild of my digital nomad blog. 
+    summary: I recently presented at Seattle WP Developers meetup on my recent headless WP rebuild of my digital nomad blog. 
     slug: headless-wordpress-and-gatsby-presentation
 ---
 

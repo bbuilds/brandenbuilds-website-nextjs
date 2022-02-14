@@ -67,23 +67,12 @@ export const TagSEO = ({ title, description }) => {
 	);
 };
 
-export const BlogSEO = ({ title, summary, date, lastmod, url, images = [] }) => {
+export const BlogSEO = ({ title, summary, date, lastmod, url, featuredImage }) => {
 	const router = useRouter();
 	const publishedAt = new Date(date).toISOString();
 	const modifiedAt = new Date(lastmod || date).toISOString();
-	let imagesArr =
-		images.length === 0
-			? [siteMetaData.socialBanner]
-			: typeof images === 'string'
-			? [images]
-			: images;
 
-	const featuredImages = imagesArr.map((img) => {
-		return {
-			'@type': 'ImageObject',
-			url: `${siteMetaData.siteUrl}${img}`
-		};
-	});
+	const featuredImageURL = `${siteMetaData.siteUrl}${featuredImage}`;
 
 	const authorList = {
 		'@type': 'Person',
@@ -98,7 +87,7 @@ export const BlogSEO = ({ title, summary, date, lastmod, url, images = [] }) => 
 			'@id': url
 		},
 		headline: title,
-		image: featuredImages,
+		image: featuredImageURL,
 		datePublished: publishedAt,
 		dateModified: modifiedAt,
 		author: authorList,
@@ -113,16 +102,14 @@ export const BlogSEO = ({ title, summary, date, lastmod, url, images = [] }) => 
 		description: summary
 	};
 
-	const twImageUrl = featuredImages[0].url;
-
 	return (
 		<>
 			<CommonSEO
 				title={title}
 				description={summary}
 				ogType="article"
-				ogImage={featuredImages}
-				twImage={twImageUrl}
+				ogImage={featuredImageURL}
+				twImage={featuredImageURL}
 			/>
 			<Head>
 				{date && <meta property="article:published_time" content={publishedAt} />}

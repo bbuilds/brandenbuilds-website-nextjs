@@ -4,7 +4,7 @@
     date: "2022-02-12"
     featuredImage: /images/blog/local-seo-google-business-profile/local-seo-google-business-profile.jpg
     id: b7
-    excerpt: Google Business Profile is arguably the most important tool for a business looking to geotarget an area. Here's a guide to getting BGP set up.
+    summary: Google Business Profile is arguably the most important tool for a business looking to geotarget an area. Here's a guide to getting BGP set up.
     slug: local-seo-google-business-profile
     keywords: local seo, seo, google business profile
     genre: seo
