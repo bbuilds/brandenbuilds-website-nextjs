@@ -9,7 +9,7 @@ const siteMetaData = {
 		'Branden Builds specializes in building custom web development, headless wordpress solutions, and telling bad ass stories',
 	language: 'en-us',
 	siteUrl: server,
-	siteRepo: 'https://github.com/bbuilds/bbuilds-nextjs',
+	siteRepo: 'https://github.com/bbuilds/brandenbuilds-website-nextjs',
 	siteLogo: '/images/logo.png',
 	socialBanner: '/images/brandenbuilds-opengraph.jpg',
 	email: 'hello@brandenbuilds.com',
