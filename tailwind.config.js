@@ -6,7 +6,7 @@ let bbuildscolors = {
 };
 
 module.exports = {
-	purge: ['./components/**/*.js', './pages/**/*.js', './styles/*.css', './layouts/**/*.js'],
+	content: ['./components/**/*.js', './pages/**/*.js', './styles/*.css', './layouts/**/*.js'],
 	theme: {
 		extend: {
 			colors: {

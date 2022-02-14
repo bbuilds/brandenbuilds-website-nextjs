@@ -5,13 +5,18 @@ import siteMetaData from '@/data/siteMetaData';
 import PostCardStyles from '@/styles/post-card.module.css';
 
 export default function PostCard({ post }) {
-	const { featuredImage, title, slug, excerpt, date } = post;
+	const { featuredImage, title, slug, excerpt, date, tags } = post;
 	return (
-		<article className={cn('relative group', PostCardStyles['post-preview'])}>
+		<article
+			className={cn(
+				'relative group transition duration-300 ease-in-out bg-zinc-50 h-full rounded-xl overflow-hidden hover:drop-shadow-md focus:drop-shadow-md',
+				PostCardStyles['post-preview']
+			)}
+		>
 			<div
 				className={cn(
 					PostCardStyles['post-preview-image'],
-					'post-preview-image bg-bbuilds-black m-auto overflow-hidden rounded-xl h-48 w-full flex items-center justify-center text-bbuilds-gray relative transition duration-300 ease-in-out'
+					'post-preview-image m-auto bg-bbuilds-black  h-48 w-full flex items-center justify-center text-bbuilds-gray relative transition duration-300 ease-in-out'
 				)}
 			>
 				<Image src={featuredImage} alt={title} className="img" width={488} height={214} />
@@ -32,25 +37,37 @@ export default function PostCard({ post }) {
 					></path>
 				</svg>
 			</div>
-			<Link href={`/${slug}`}>
-				<a className="link-shield">
-					<h2 className="my-3 leading-none text-xl">{title}</h2>
-				</a>
-			</Link>
-			<div className="post-meta mb-2">
-				<p className="text-small">
-					<span>
-						{new Date(date).toLocaleDateString(siteMetaData.locale, {
-							weekday: 'long',
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric'
-						})}
-					</span>
-				</p>
-			</div>
+			<div className="p-3 bg-off-white">
+				<Link href={`/${slug}`}>
+					<a className="link-shield">
+						<h2 className="my-3 leading-none text-xl">{title}</h2>
+					</a>
+				</Link>
+				<div className="post-meta mb-2">
+					<p className="text-small">
+						<span>
+							{new Date(date).toLocaleDateString(siteMetaData.locale, {
+								weekday: 'long',
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})}
+						</span>
+					</p>
+				</div>
 
-			<p>{excerpt}</p>
+				<p>{excerpt}</p>
+				<div className="filter sr-only">
+					{tags &&
+						tags.map((tag, index) => {
+							return (
+								<span key={index} className="tag">
+									{tag}
+								</span>
+							);
+						})}
+				</div>
+			</div>
 		</article>
 	);
 }

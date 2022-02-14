@@ -46,7 +46,7 @@ export default function PostLayout({ frontMatter, next, prev, children }) {
 									<h2 className="text-small mb-0 mr-2">Tags:</h2>
 									<div className="flex flex-wrap">
 										{tags.map((tag) => (
-											<Tag key={tag} text={tag} />
+											<Tag key={tag} text={tag} isPost={true} />
 										))}
 									</div>
 								</div>
