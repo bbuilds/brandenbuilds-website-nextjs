@@ -117,7 +117,7 @@ export default function Header({ mobileMenuState, toggleMenuState, falseMenuStat
 					<MenuToggle mobileMenuState={mobileMenuState} toggleMenuState={toggleMenuState} />
 				</div>
 				<div
-					className={`overflow-y-scroll space-y-xx-small bg-bbuilds-black border-t border-bbuilds-yellow ${
+					className={`space-y-xx-small bg-bbuilds-black border-t border-bbuilds-yellow ${
 						mobileMenuState ? 'show-nav' : 'hide-nav'
 					}`}
 				>

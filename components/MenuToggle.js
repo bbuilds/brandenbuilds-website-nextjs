@@ -2,14 +2,14 @@ export default function MenuToggle({ mobileMenuState, toggleMenuState }) {
 	return (
 		<button
 			aria-label="Show / hide nav items"
-			className="flex justify-center items-center h-8 w-12 rounded-xl bg-bbuilds-teal ml-auto md:hidden"
+			className="flex justify-center items-center h-8 w-12 rounded-xl bg-bbuilds-teal text-bbuilds-black ml-auto md:hidden"
 			onClick={toggleMenuState}
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"
 				fill="currentColor"
-				className="text-gray-900 dark:text-gray-100  w-12 h-12"
+				className="w-12 h-12"
 			>
 				{mobileMenuState ? (
 					<path

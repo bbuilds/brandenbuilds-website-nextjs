@@ -5,7 +5,7 @@ import siteMetaData from '@/data/siteMetaData';
 import PostCardStyles from '@/styles/post-card.module.css';
 
 export default function PostCard({ post }) {
-	const { featuredImage, title, slug, excerpt, date, tags } = post;
+	const { featuredImage, title, slug, summary, date, tags } = post;
 	return (
 		<article
 			className={cn(
@@ -56,7 +56,7 @@ export default function PostCard({ post }) {
 					</p>
 				</div>
 
-				<p>{excerpt}</p>
+				<p>{summary}</p>
 				<div className="filter sr-only">
 					{tags &&
 						tags.map((tag, index) => {

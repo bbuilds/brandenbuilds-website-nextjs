@@ -6,7 +6,7 @@ import cn from 'classnames';
 export default function MobileNav({ navItems, toggleMenuState }) {
 	return (
 		<>
-			<ul className={`nav-items flex flex-col px-4 pt-8 pb-20 `}>
+			<ul className={`nav-items flex flex-col px-4 pt-8 pb-20 overflow-y-scroll h-full`}>
 				{navItems &&
 					navItems.map((item) => {
 						return (
