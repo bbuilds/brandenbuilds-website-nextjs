@@ -1,66 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	<url>
-		<loc>http://localhost:3000/blog</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/branding</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/contact</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/headless-wordpress-development</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/seo</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/services</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/web-development</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/wordpress-development</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/branden-builds-launches</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/detecting-memory-leaks</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/simple-instagram-feed-gatsby-javascript</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/byoungz-headlesswp-gatsby</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/headless-wordpress-and-gatsby-presentation</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/interview-with-codehs</loc>
-	</url>
-
-	<url>
-		<loc>http://localhost:3000/local-seo-google-business-profile</loc>
-	</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://brandenbuilds.com</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/blog</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/branding</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/contact</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/headless-wordpress-development</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/seo</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/services</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/web-development</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/wordpress-development</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/branden-builds-launches</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/byoungz-headlesswp-gatsby</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/detecting-memory-leaks</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/headless-wordpress-and-gatsby-presentation</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/interview-with-codehs</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/local-seo-google-business-profile</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/simple-instagram-feed-gatsby-javascript</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/svelte</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/blog</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/hello-world</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/gatsby</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/headless</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/wordpress</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/fuite</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/memory-leaks</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/dev-tools</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/presentation</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/interview</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/codehs</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/gmb</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/google-my-business</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/google-business-profile</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/gbp</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/local-seo</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/seo</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/instagram</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brandenbuilds.com/tags/serverless-functions</loc><lastmod>2023-11-21T17:38:34.507Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
